@@ -1,4 +1,3 @@
-<meta charset="utf-8">
 <?php
 /************
  * Класс Машина
@@ -37,27 +36,23 @@ class Car
   private $colour;
   private $year;
 
-  function __construct($owner, $colour='Белый')
-  {
+  function __construct($owner, $colour='Белый'){
     $this->owner = $owner;
     $this->colour = $colour;
     $this->year = date("Y");
   }
 
-  public function StartEngine()
-  {
+  public function StartEngine(){
     $this->engine_started = true;
     echo "Двигатель завелся<br>";
   }
 
-  public function StopEngine()
-  {
+  public function StopEngine(){
     $this->engine_started = false;
     echo "Двигатель заглушен<br>";
   }
 
-  public function Accelerate()
-  {
+  public function Accelerate(){
     if($this->engine_started && $this->current_speed < self::Max_speed){
       $this->current_speed += 10;
       $this->current_position['x'] += 10;
@@ -71,8 +66,7 @@ class Car
     }
   }
 
-  public function SlowDown()
-  {
+  public function SlowDown(){
     if($this->engine_started && $this->current_speed > 0){
       $this->current_speed -= 10;
       $this->current_position['x'] -= 10;
@@ -83,14 +77,12 @@ class Car
     }
   }
 
-  public function SellCar($new_owner)
-  {
+  public function SellCar($new_owner){
       $this->owner = $new_owner;
       echo "Новый владелец - ".$new_owner."<br>";
   }
 
-  public function GetPassanger($new_passanger)
-  {
+  public function GetPassanger($new_passanger){
     if (count($this->passangers)<self::Max_passangers){
       $this->passangers[] = $new_passanger;
     }
@@ -99,6 +91,7 @@ class Car
     }
   }
 }
+
 echo "Автомобили:<br>";
 $first_aston = new Car('Михаил', 'Черный');
 $first_aston->StartEngine();
@@ -145,27 +138,23 @@ echo "--------------------<br>";
 
    const max_volume = 100;
 
-   function __construct($screen_size, $resolution)
-   {
+   function __construct($screen_size, $resolution){
      $this->screen_size = $screen_size;
      $this->resolution = $resolution;
      $this->year = date("Y");
    }
 
-   public function TurnOn()
-   {
+   public function TurnOn(){
      $this->turned_on = true;
      echo "TV включен<br>";
    }
 
-   public function TurnOff()
-   {
+   public function TurnOff(){
      $this->engine_started = false;
      echo "TV выключен<br>";
    }
 
-   public function NextChannel()
-   {
+   public function NextChannel(){
      if($this->turned_on && $this->current_channel < $this->count_channels){
        $this->current_channel += 1;
      }
@@ -179,8 +168,7 @@ echo "--------------------<br>";
      echo "Текущий канал - ".$this->current_channel."<br>";
    }
 
-   public function PreviousCannel()
-   {
+   public function PreviousCannel(){
      if($this->turned_on && $this->current_channel > 1){
        $this->current_channel -= 1;
      }
@@ -194,8 +182,7 @@ echo "--------------------<br>";
      echo "Текущий канал - ".$this->current_channel."<br>";
    }
 
-   public function VolumeUp()
-   {
+   public function VolumeUp(){
      if($this->turned_on && $this->current_volume < self::max_volume){
        $this->current_volume += 1;
        echo "Текущая громкость - ".$this->current_volume."<br>";
@@ -208,8 +195,7 @@ echo "--------------------<br>";
      }
    }
 
-   public function VolumeDown()
-   {
+   public function VolumeDown(){
      if($this->turned_on && $this->current_volume > 0){
        $this->current_volume -= 1;
        echo "Текущая громкость - ".$this->current_volume."<br>";
@@ -222,12 +208,12 @@ echo "--------------------<br>";
      }
    }
 
-   public function GetNewChannels()
-   {
+   public function GetNewChannels(){
      $this->count_channels += rand(0,10);
      echo "Всего каналов - ".$this->count_channels."<br>";
    }
  }
+
 echo "Телевизоры:<br>";
 $TV_one = new TV(40, "FullHD");
 $TV_two = new TV(22, "HD");
@@ -252,14 +238,12 @@ class Pen
 {
   private $ink_left;
   private $ink_colour;
-  function __construct($ink_colour='blue')
-  {
+  function __construct($ink_colour='blue'){
     $this->ink_colour = $ink_colour;
     $this->ink_left = 100;
   }
 
-  public function Write($text)
-  {
+  public function Write($text){
     $ink_needed = round(strlen($text)/10);
     if ($ink_needed <= $this->ink_left) {
       echo "<font color=\"".$this->ink_colour."\">$text</font><br>";
@@ -270,11 +254,11 @@ class Pen
     }
   }
 
-  public function FillInk()
-  {
+  public function FillInk(){
     $this->ink_left = 100;
   }
 }
+
 echo "Ручки:<br>";
 $pen_one = new Pen();
 $pen_two = new Pen('black');
@@ -304,14 +288,12 @@ class Duck
                     'z' => 0);
  private $age;
 
- private function GetRandCoord()
- {
+ private function GetRandCoord(){
    $destination = (rand(0,1) == 0)?1:-1;
    return $destination*rand(0,200);
  }
 
- Public function RandTravel()
- {
+  public function RandTravel(){
    $this->position['x'] = $this->GetRandCoord();
    $this->position['y'] = $this->GetRandCoord();
    $this->position['z'] = abs($this->GetRandCoord());// так как утка не может уйти под землю
@@ -320,19 +302,16 @@ class Duck
    $this->hunger += rand(5,15);
  }
 
- function __construct($age)
- {
+ function __construct($age){
    $this->age = $age;
    $this->RandTravel();
  }
 
- public function Quack()
- {
+ public function Quack(){
    echo "Кря-кря-кря<br>";
  }
 
- public function Eat()
- {
+ public function Eat(){
    $food = rand(0,35);
    if ($this->hunger > $food){
      $this->hunger -= $food;
@@ -343,10 +322,13 @@ class Duck
   echo 'Голод утки - '.$this->hunger;
  }
 }
+
+
 echo "Утки:<br>";
 echo "Перемещения первой утки:<br>";
 $first_duck = new Duck(7);
 $first_duck->RandTravel();
+
 echo "Перемещения второй утки:<br>";
 $second_duck = new Duck(15);
 $second_duck->Quack();
@@ -374,8 +356,7 @@ class Product
  private $category;
  private $discount;
 
- function __construct($name, $price, $category, $discount=0)
- {
+ function __construct($name, $price, $category, $discount=0){
    self::$id+=1;
    $this->name = $name;
    $this->price = $price;
@@ -383,19 +364,17 @@ class Product
    $this->discount = $discount;
  }
 
- public function GetPrice()
- {
+ public function GetPrice(){
    echo "Стоимость $this->name = $this->price<br>";
  }
 
- public function GetDiscountPrice()
- {
+ public function GetDiscountPrice(){
    echo "Стоимость $this->name со скидкой = ".($this->price - ($this->price*$this->discount/100))."<br>";
  }
 }
+
 echo "Товары:<br>";
 $first_product = new Product('Iphone X', 95000, 'Телефоны');
 $first_product->GetPrice();
 $second_product = new Product('Холодильник', 45000, 'Холодильники', 5);
 $second_product->GetDiscountPrice();
-?>
